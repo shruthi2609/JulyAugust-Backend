@@ -8,7 +8,7 @@ const universitySchema=mongoose.Schema(
           unique:true,
           required:[true,"email required"],
           
-          
+   
       },
       username:String,
       password:String,

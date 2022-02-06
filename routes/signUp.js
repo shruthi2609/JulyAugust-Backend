@@ -1,8 +1,11 @@
 const express=require("express")
 const router=express.Router()
 const User=require("../models/userModel")
-router.post("/signup",(req,res)=>{
+const bcrypt=require("bcrypt")
+router.post("/signup",async (req,res)=>{
     const data=req.body
+    data.password=await bcrypt.hash(data.password,7)
+  
     const user1=new User(
         {
           email:data.email,
@@ -16,7 +19,7 @@ router.post("/signup",(req,res)=>{
           interest:data.interest
         }
     )
-    user1.save().then(()=>res.send("user signup successfull")).catch((err)=>res.send("error in signup"))
+ await  user1.save().then(()=>res.send("user signup successfull")).catch((err)=>res.send("error in signup"))
     
 })
 
